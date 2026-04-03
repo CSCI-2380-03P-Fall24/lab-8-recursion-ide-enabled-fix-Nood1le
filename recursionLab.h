@@ -9,14 +9,22 @@ using namespace std;
 //          lineOfStars(0) returns ""
 // You may not use a loop.
 string lineOfStars(int n) {
-	return "fixme";
+	if(n <= 0){ return "";
+	}
+	return "*" + lineOfStars(n - 1);
 }
 
 // Write a function power() that will
 //    compute the x to the power of n recursively
 // if the power is invalid, return 0
 float power(float x, int n) {
-	return -1;	
+	if(n < 0){
+		return 0;
+	}
+	if(n == 0){
+		return 1.0;
+	}
+	return x * power(x, n - 1);	
 }
 
 /*
@@ -36,7 +44,9 @@ should display:
 ****
 
 */
-void stars(int n) {}
+void stars(int n) {
+	cout << lineOfStars(n) << endl;
+}
 
 // Write a *recursive* function that will check if
 //    a string is a palindrome
@@ -44,7 +54,19 @@ void stars(int n) {}
 // Hint 2: s.substr(i,j) gives you the substring of s. For example if s = Hello, s(1,s.length()-1) gives you ello
 bool isPalindromeR(string s)
 {
+	//base case, once the recursion reaches a string length
+	//of 1 then that means it passed all if statements and is palindrome
+	if(s.length() <= 1 ){
+		return true;
+	}
+	//recursion, removes a character from the string for each call
+	if(s.front() == s.back()){
+		return isPalindromeR(s.substr(1, s.length() - 2));
+	}
+
+	else{
 	return false;
+	}
 }
 
 
@@ -53,7 +75,11 @@ bool isPalindromeR(string s)
 //  methods from the previous function
 string reverse(string s)
 {
-	return "fixme"; 
+	if(s.length() == 0){
+		return "";
+	}
+
+	return s.back() + reverse(s.substr(0, s.length() - 1)); 
 }
 
 // Write a function that returns the sum of the decimal digits of n.
@@ -61,7 +87,13 @@ string reverse(string s)
 //          sumDigits(-4096) returns 19
 // You may not use a loop. Treat n as its absolute value.
 int sumDigits(int n) {
-    return -1; // fix this!
+	if(abs(n)/10 == 0){
+		return n;
+	}
+	int sum = abs(n) % 10;
+
+    return sum + sumDigits(abs(n)/10); // fix this!
+	
 }
 
 // Write a function that returns how many times x appears
