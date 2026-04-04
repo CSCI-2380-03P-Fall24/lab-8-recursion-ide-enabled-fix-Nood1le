@@ -101,5 +101,11 @@ int sumDigits(int n) {
 // Example: arr = {1,1,2}, n = 3, x = 1  returns 2
 // You may not use a loop.
 int countOccurrences(const int* arr, int n, int x) {
-    return -1; // fix this!
+    if(n == 0){
+		return 0;
+	}
+	if(*arr == x){
+		return 1 + countOccurrences(arr + 1, n - 1, x);
+	}
+	return countOccurrences(arr + 1, n - 1, x); // fix this!
 }
